@@ -30,17 +30,13 @@ public class Client implements Runnable{
 				String commande = "Coucou JeansJacques";
 				out.write(commande);
 				out.flush();
-				System.out.println("Commande "+commande+" envoyée au serveur");
+				System.out.println("Commande "+commande+" envoyï¿½e au serveur");
 				clientSocket.close();
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
 		}
 
-	}
-	public static void main(String[] args) {
-		Client cli = new Client("10.212.100.252", 4000);
-		cli.run();
 	}
 }
 
