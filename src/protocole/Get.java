@@ -16,4 +16,6 @@ public class Get {
 	public HashMap<String, String> getDatas() {
 		return datas;
 	}
+	
+	//get
 }
