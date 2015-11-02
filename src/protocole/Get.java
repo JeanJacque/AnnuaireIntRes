@@ -2,7 +2,7 @@ package protocole;
 
 import java.util.HashMap;
 
-public class Get {
+public class Get extends Request{
 	private HashMap<String,String> datas;
 	
 	public Get() {
@@ -16,6 +16,10 @@ public class Get {
 	public HashMap<String, String> getDatas() {
 		return datas;
 	}
-	
-	//get
+
+	@Override
+	public void exec() {
+		
+	}
+
 }
