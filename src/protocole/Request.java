@@ -4,20 +4,20 @@ import java.io.Serializable;
 
 /** 
  * 
- * @author Alexandre CAZALA, Théo DONZELLE
+ * @author Alexandre CAZALA, Theo DONZELLE
  * 
- * Classe mère des requêtes, elle permet de les regrouper sous une même classe.
- * Ainsi le serveur récupèrera une Request et executera la méthode exec (redéfinie dans chaque classe).
+ * Classe mere des requetes, elle permet de les regrouper sous une meme classe.
+ * Ainsi le serveur recuperera une Request et executera la methode exec (redefinie dans chaque classe).
  *
  */
 public abstract class Request implements Serializable{
 	private static final long serialVersionUID = -8618391044869076165L;
 	
 	/**
-	 * @author Alexandre CAZALA, Théo DONZELLE
+	 * @author Alexandre CAZALA, Theo DONZELLE
 	 * 
-	 * La méthode exec est définie en abstract puisqu'elle sera implémentée dans les classes filles.
-	 * Elle correspond à ce qu'il faut faire pour "répondre" à la requête du client.
+	 * La methode exec est definie en abstract puisqu'elle sera implementee dans les classes filles.
+	 * Elle correspond e ce qu'il faut faire pour "repondre" e la requete du client.
 	 */
 	public abstract void exec();
 }

@@ -15,7 +15,7 @@ import client.Client;
  * avec celui-ci et ainsi de permettre au client connecté d'utiliser les
  * services proposés.
  * 
- * @author Alexandre Cazala, Théo Donzelle
+ * @author Alexandre Cazala, Theo Donzelle
  * 
  */
 public class Serveur {

@@ -2,8 +2,8 @@ package protocole;
 
 import java.util.HashMap;
 /**
- * La classe Get correspond à la requête client demandant la totalité des surnoms et des noms
- * @author Alexandre CAZALA, Théo Donzelle
+ * La classe Get correspond e la requete client demandant la totalite des surnoms et des noms
+ * @author Alexandre CAZALA, Theo Donzelle
  * 
  */
 public class Get extends Request{
@@ -12,14 +12,14 @@ public class Get extends Request{
 	private HashMap<String,String> datas;
 	
 	/**
-	 * Constructeur par défaut
-	 * @author Alexandre CAZALA, Théo Donzelle
+	 * Constructeur par defaut
+	 * @author Alexandre CAZALA, Theo Donzelle
 	 */
 	public Get() {
 		
 	}
 	
-	public void setDatas(HashMap<String, String> result) {
+	private void setDatas(HashMap<String, String> result) {
 		datas = result;
 	}
 	
@@ -28,7 +28,7 @@ public class Get extends Request{
 	}
 
 	/**
-	 * Copiera les données du serveur dans l'attribut datas de la classe.
+	 * Copiera les donnees du serveur dans l'attribut datas de la classe.
 	 */
 	@Override
 	public void exec() {

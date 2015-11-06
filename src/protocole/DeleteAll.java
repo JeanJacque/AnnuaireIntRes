@@ -1,8 +1,8 @@
 package protocole;
 
 /**
- * Requete demandant la suppression de toutes les données du serveur
- * @author Alexandre CAZALA, Théo DONZELLE
+ * Requete demandant la suppression de toutes les donnees du serveur
+ * @author Alexandre CAZALA, Theo DONZELLE
  *
  */
 public class DeleteAll extends Request{
