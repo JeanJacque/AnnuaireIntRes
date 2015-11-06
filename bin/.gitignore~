@@ -1,3 +1,9 @@
 /serveur/
 /client/
 /protocole/
+<<<<<<< HEAD
+*.class
+Launcher.java
+=======
+/Launcher.class
+>>>>>>> 5b61b4b6a2825b8760f172ef739b823fed392b69

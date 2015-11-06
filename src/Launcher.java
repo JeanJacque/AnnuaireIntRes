@@ -2,8 +2,9 @@ import client.Client;
 import serveur.Serveur;
 
 /**
- * @author ThÃ©o Donzelle
+ * @author Théo Donzelle, Alexandre CAZALA
  * 
+ * Fonction lançant le serveur
  */
 public class Launcher {
     public static void main(String[] args) {
