@@ -1,6 +1,10 @@
 package protocole;
 
-
+/**
+ * Requete demandant l'ajout d'un nom avec une liste de surnoms associés
+ * @author Alexandre CAZALA, Théo DONZELLE
+ *
+ */
 public class AddName extends Request{
 
 	/**
