@@ -1,3 +1,4 @@
+package launcher;
 import client.Client;
 import serveur.Serveur;
 
@@ -6,7 +7,7 @@ import serveur.Serveur;
  * 
  * Fonction lançant le serveur
  */
-public class Launcher {
+public class LauncherClient {
     public static void main(String[] args) {
         int port = 4000;
         // Launcher cote serveur
