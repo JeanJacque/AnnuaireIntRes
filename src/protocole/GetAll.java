@@ -32,7 +32,7 @@ public class GetAll extends Request{
 	 */
 	@Override
 	public void exec(HashMap<String, String> datas) {
-		// TODO Auto-generated method stub
+		this.datas = datas;
 		
 	}
 
