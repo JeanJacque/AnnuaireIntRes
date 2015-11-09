@@ -2,10 +2,15 @@ package client;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Vector;
 
 import org.omg.CORBA.portable.UnknownException;
+
+import protocole.AddName;
 
 /**
  * 
@@ -17,7 +22,7 @@ import org.omg.CORBA.portable.UnknownException;
  */
 public class Client implements Runnable {
     private Socket clientSocket;
-    private PrintWriter out;
+    private OutputStream os;
     private BufferedInputStream in;
 
     /**
@@ -50,18 +55,17 @@ public class Client implements Runnable {
         System.err.println("Lancement du traitement de connection cliente");
         while (!clientSocket.isClosed()) {
             try {
-                out = new PrintWriter(clientSocket.getOutputStream(), true);
-                in = new BufferedInputStream(clientSocket.getInputStream());
-                String commande = "Coucou JeansJacques";
-                out.write(commande);
-                out.flush();
-                System.out.println("Commande " + commande
-                        + " envoyï¿½e au serveur");
+            	os = clientSocket.getOutputStream();
+            	ObjectOutputStream oos = new ObjectOutputStream(os);
+            	Vector<String> ask = new Vector<String>();
+            	ask.add("BunnyDunker");
+            	ask.add("Trigunale");
+            	oos.writeObject(new AddName("Alex", ask));
+                System.out.println("Commande envoyée au serveur");
                 clientSocket.close();
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
         }
-
     }
 }

@@ -31,7 +31,8 @@ public class GetAll extends Request{
 	 * Copiera les donnees du serveur dans l'attribut datas de la classe.
 	 */
 	@Override
-	public void exec() {
+	public void exec(HashMap<String, String> datas) {
+		// TODO Auto-generated method stub
 		
 	}
 

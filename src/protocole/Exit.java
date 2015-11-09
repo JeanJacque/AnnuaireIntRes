@@ -1,5 +1,7 @@
 package protocole;
 
+import java.util.HashMap;
+
 /**
  * Requete de l'interruption de la connexion client-serveur
  * 
@@ -13,9 +15,9 @@ public class Exit extends Request {
 	 * Ferme la connexion avec le client du cote serveur
 	 */
 	@Override
-	public void exec() {
+	public void exec(HashMap<String, String> datas) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 }
