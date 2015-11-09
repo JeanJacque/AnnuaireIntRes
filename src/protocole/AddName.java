@@ -19,7 +19,7 @@ public class AddName extends Request{
 	}
 	
 	@Override
-	public void exec(HashMap<String, String> datas) {
+	public int exec(HashMap<String, String> datas) {
 		for (String nickname : nicknames) {
 			if (datas.containsKey(nickname))
 				status += "ERREUR : Le nom " + nickname + " existe deja \n";
@@ -27,6 +27,7 @@ public class AddName extends Request{
 				datas.put(nickname, name);
 				status += "SUCCESS : Association de " + name + " à " + nickname + "reussie\n";
 			}
-		}	
+		}
+		return 0;
 	}
 }

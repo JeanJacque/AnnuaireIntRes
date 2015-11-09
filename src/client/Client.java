@@ -4,13 +4,13 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Vector;
 
 import org.omg.CORBA.portable.UnknownException;
 
 import protocole.AddName;
+import protocole.GetAll;
 
 /**
  * 
@@ -61,6 +61,8 @@ public class Client implements Runnable {
             	ask.add("BunnyDunker");
             	ask.add("Trigunale");
             	oos.writeObject(new AddName("Alex", ask));
+            	oos.writeObject(new GetAll());
+            	oos.writeObject(new Exit());
                 System.out.println("Commande envoyée au serveur");
                 clientSocket.close();
             } catch (IOException e1) {

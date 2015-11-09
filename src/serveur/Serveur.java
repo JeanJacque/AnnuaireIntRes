@@ -10,8 +10,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
 
+import protocole.Exit;
 import protocole.Request;
-
 import client.Client;
 
 /**
@@ -42,8 +42,6 @@ public class Serveur {
     public Serveur(int port) {
         try {
             socketServer = new ServerSocket(port);
-            socketduserveur = socketServer.accept();
-            System.out.println("Connexion etablie");
         } catch (IOException e) {
             System.err.println(e);
         }
@@ -56,11 +54,15 @@ public class Serveur {
      */
     public void run() {
         try {
-            InputStream is = socketduserveur.getInputStream(); 
-            ObjectInputStream ois = new ObjectInputStream(is);
-            
-            Request r = (Request) ois.readObject();
-            r.exec(datas);
+        	socketduserveur = socketServer.accept();
+            System.out.println("Connexion etablie");
+            Request r;
+            do {
+	            InputStream is = socketduserveur.getInputStream(); 
+	            ObjectInputStream ois = new ObjectInputStream(is);
+	            
+	            r = (Request) ois.readObject();
+            } while (r.exec(datas) < 0);
             socketduserveur.close();
             socketServer.close();
         } catch (IOException e) {

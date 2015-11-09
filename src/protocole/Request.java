@@ -20,5 +20,5 @@ public abstract class Request implements Serializable{
 	 * La methode exec est definie en abstract puisqu'elle sera implementee dans les classes filles.
 	 * Elle correspond e ce qu'il faut faire pour "repondre" e la requete du client.
 	 */
-	public abstract void exec(HashMap<String, String> datas);
+	public abstract int exec(HashMap<String, String> datas);
 }
