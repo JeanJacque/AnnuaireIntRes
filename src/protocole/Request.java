@@ -1,6 +1,7 @@
 package protocole;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 /** 
  * 
@@ -12,12 +13,11 @@ import java.io.Serializable;
  */
 public abstract class Request implements Serializable{
 	private static final long serialVersionUID = -8618391044869076165L;
-	
 	/**
 	 * @author Alexandre CAZALA, Theo DONZELLE
 	 * 
 	 * La methode exec est definie en abstract puisqu'elle sera implementee dans les classes filles.
 	 * Elle correspond e ce qu'il faut faire pour "repondre" e la requete du client.
 	 */
-	public abstract void exec();
+	public abstract void exec(HashMap<String, String> datas);
 }
