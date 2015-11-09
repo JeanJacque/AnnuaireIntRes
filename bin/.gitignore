@@ -3,3 +3,6 @@
 /protocole/
 *.class
 Launcher.class
+/suppression/
+/suppressions/
+/launcher/
