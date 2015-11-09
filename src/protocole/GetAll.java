@@ -6,7 +6,7 @@ import java.util.HashMap;
  * @author Alexandre CAZALA, Theo Donzelle
  * 
  */
-public class Get extends Request{
+public class GetAll extends Request{
 	
 	private static final long serialVersionUID = 1584234089812003947L;
 	private HashMap<String,String> datas;
@@ -15,7 +15,7 @@ public class Get extends Request{
 	 * Constructeur par defaut
 	 * @author Alexandre CAZALA, Theo Donzelle
 	 */
-	public Get() {
+	public GetAll() {
 		
 	}
 	
