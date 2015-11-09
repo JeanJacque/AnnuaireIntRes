@@ -33,7 +33,6 @@ public class GetAll extends Request{
 	@Override
 	public void exec(HashMap<String, String> datas) {
 		setDatas(datas);
-		
 	}
 
 }
