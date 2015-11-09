@@ -57,12 +57,15 @@ public class Serveur {
         	socketduserveur = socketServer.accept();
             System.out.println("Connexion etablie");
             Request r;
+            int nb = 0;
             do {
 	            InputStream is = socketduserveur.getInputStream(); 
 	            ObjectInputStream ois = new ObjectInputStream(is);
 	            
 	            r = (Request) ois.readObject();
+	            nb++;
             } while (r.exec(datas) < 0);
+            System.out.println("Connexion finie !! ("  + nb + " requetes)");
             socketduserveur.close();
             socketServer.close();
         } catch (IOException e) {
