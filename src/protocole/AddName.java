@@ -19,11 +19,13 @@ public class AddName extends Request{
 	}
 	@Override
 	public void exec(HashMap<String, String> datas) {
-		for (String nickname : nicknames) {
-			if (datas.containsKey(nickname))
-				error += "ERREUR : Le nom " + nickname + " existe déjà \n";
-			else
-				datas.put(nickname, name);
-		}	
+//		for (String nickname : nicknames) {
+//			if (datas.containsKey(nickname))
+//				error += "ERREUR : Le nom " + nickname + " existe dï¿½jï¿½ \n";
+//			else
+//				datas.put(nickname, name);
+//		}	
+	    for (String nickname : nicknames)
+	        System.out.println(nickname);
 	}
 }
