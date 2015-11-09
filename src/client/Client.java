@@ -10,6 +10,7 @@ import java.util.Vector;
 import org.omg.CORBA.portable.UnknownException;
 
 import protocole.AddName;
+import protocole.Exit;
 import protocole.GetAll;
 
 /**
