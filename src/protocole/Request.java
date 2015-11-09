@@ -13,7 +13,7 @@ import java.util.HashMap;
  */
 public abstract class Request implements Serializable{
 	private static final long serialVersionUID = -8618391044869076165L;
-	protected String error;
+	protected String status;
 	/**
 	 * @author Alexandre CAZALA, Theo DONZELLE
 	 * 
