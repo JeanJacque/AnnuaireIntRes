@@ -22,10 +22,12 @@ public class GetAll extends Request{
 	private void setDatas(HashMap<String, String> result) {
 		datas = result;
 	}
-	
-	public HashMap<String, String> getDatas() {
+	//yo
+	private HashMap<String, String> getDatas() {
 		return datas;
+		
 	}
+
 
 	/**
 	 * Copiera les donnees du serveur dans l'attribut datas de la classe.
