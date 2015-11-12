@@ -10,6 +10,7 @@ import java.net.Socket;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import protocole.Request;
@@ -64,12 +65,13 @@ public class Serveur {
 	            
 	            r = (Request) ois.readObject();
 	            if (r.exec(datas) < 0) break;
-	            Set set = datas.entrySet();
-	            Iterator iterator = set.iterator();
-	            while(iterator.hasNext()) {
-	               Map.Entry mentry = (Map.Entry)iterator.next();
-	               System.out.print("nickname: "+ mentry.getKey() + "\t name:" + mentry.getValue());
+	            for(Entry<String, String> entry : datas.entrySet()){
+	                System.out.println(entry.getKey()+ " -> " + entry.getValue());
 	            }
+//	            while(iterator.hasNext()) {
+//	               Map.Entry mentry = (Map.Entry)iterator.next();
+//	               System.out.println("nickname: "+ mentry.getKey() + "\t name:" + mentry.getValue());
+//	            }
             }
             System.out.println("Connexion finie !! ("  + nb + " requetes)");
             socketduserveur.close();
