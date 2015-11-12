@@ -62,9 +62,9 @@ public class Client implements Runnable {
             	ask.add("BunnyDunker");
             	ask.add("Trigunale");
             	oos.writeObject(new AddName("Alex", ask));
-            	oos.writeObject(new GetAll());
-            	oos.writeObject(new Exit());
-                System.out.println("Commande envoyée au serveur");
+//            	oos.writeObject(new GetAll());
+//            	oos.writeObject(new Exit());
+                System.out.println("Commande envoyï¿½e au serveur");
                 clientSocket.close();
             } catch (IOException e1) {
                 e1.printStackTrace();

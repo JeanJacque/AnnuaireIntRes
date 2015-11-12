@@ -25,7 +25,7 @@ public class AddName extends Request{
 				status += "ERREUR : Le nom " + nickname + " existe deja \n";
 			else {
 				datas.put(nickname, name);
-				status += "SUCCESS : Association de " + name + " à " + nickname + "reussie\n";
+				status += "SUCCESS : Association de " + name + " a " + nickname + "reussie\n";
 			}
 		}
 		return 0;

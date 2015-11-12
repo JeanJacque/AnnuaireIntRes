@@ -64,8 +64,9 @@ public class Serveur {
 	            
 	            r = (Request) ois.readObject();
 	            nb++;
-            } while (r.exec(datas) < 0);
-            System.out.println("Connexion finie !! ("  + nb + " requetes)");
+	            System.out.println("Requete " + nb);
+            } while (r.exec(datas) >= 0);
+            System.out.println("Connexion finie !!");
             socketduserveur.close();
             socketServer.close();
         } catch (IOException e) {
@@ -73,6 +74,6 @@ public class Serveur {
         } catch (ClassNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        }
+        } 
     }
 }
