@@ -3,16 +3,16 @@ package serveur;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
-import protocole.Exit;
 import protocole.Request;
-import client.Client;
 
 /**
  * 
@@ -58,13 +58,19 @@ public class Serveur {
             System.out.println("Connexion etablie");
             Request r;
             int nb = 0;
-            do {
+            while(true) {
 	            InputStream is = socketduserveur.getInputStream(); 
 	            ObjectInputStream ois = new ObjectInputStream(is);
 	            
 	            r = (Request) ois.readObject();
-	            nb++;
-            } while (r.exec(datas) < 0);
+	            if (r.exec(datas) < 0) break;
+	            Set set = datas.entrySet();
+	            Iterator iterator = set.iterator();
+	            while(iterator.hasNext()) {
+	               Map.Entry mentry = (Map.Entry)iterator.next();
+	               System.out.print("nickname: "+ mentry.getKey() + "\t name:" + mentry.getValue());
+	            }
+            }
             System.out.println("Connexion finie !! ("  + nb + " requetes)");
             socketduserveur.close();
             socketServer.close();
