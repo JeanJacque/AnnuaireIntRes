@@ -1,6 +1,6 @@
 package protocole;
 
-import java.util.HashMap;
+import java.util.Hashtable;
 
 /**
  * La classe Get correspond e la requete client demandant la totalite des
@@ -12,7 +12,7 @@ import java.util.HashMap;
 public class GetAll extends Request {
 
 	private static final long serialVersionUID = 1584234089812003947L;
-	private HashMap<String, String> datas;
+	private Hashtable<String, String> datas;
 
 	/**
 	 * Constructeur par defaut
@@ -23,11 +23,11 @@ public class GetAll extends Request {
 
 	}
 
-	private void setDatas(HashMap<String, String> result) {
+	private void setDatas(Hashtable<String, String> result) {
 		datas = result;
 	}
 
-	public HashMap<String, String> getDatas() {
+	public Hashtable<String, String> getDatas() {
 		return datas;
 
 	}
@@ -36,7 +36,7 @@ public class GetAll extends Request {
 	 * Copiera les donnees du serveur dans l'attribut datas de la classe.
 	 */
 	@Override
-	public int exec(HashMap<String, String> datas) {
+	public int exec(Hashtable<String, String> datas) {
 		setDatas(datas);
 		return 0;
 	}

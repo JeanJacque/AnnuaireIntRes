@@ -1,7 +1,7 @@
 package protocole;
 
 import java.io.Serializable;
-import java.util.HashMap;
+import java.util.Hashtable;
 
 /** 
  * 
@@ -20,5 +20,5 @@ public abstract class Request implements Serializable{
 	 * La methode exec est definie en abstract puisqu'elle sera implementee dans les classes filles.
 	 * Elle correspond e ce qu'il faut faire pour "repondre" e la requete du client.
 	 */
-	public abstract int exec(HashMap<String, String> datas);
+	public abstract int exec(Hashtable<String, String> datas);
 }

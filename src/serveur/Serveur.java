@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -29,10 +30,7 @@ import protocole.Request;
  */
 public class Serveur {
     private ServerSocket socketServer;
-    private Socket socketduserveur;
-    private BufferedReader in;
-    private PrintWriter out;
-    private HashMap<String, String> datas;
+    private Hashtable<String, String> datas;
 
     /**
      * 
@@ -49,7 +47,7 @@ public class Serveur {
         } catch (IOException e) {
             System.err.println(e);
         }
-        datas = new HashMap<String, String>();
+        datas = new Hashtable<String, String>();
     }
 
     /**
@@ -57,37 +55,28 @@ public class Serveur {
      * traiter, tant que la connexion n'est pas fermée
      */
     public void run() {
-        int nb = 0;
-        try {
-        	socketduserveur = socketServer.accept();
-            System.out.println("Connexion etablie");
-            Request r;
-            // Flux d'entree
-            InputStream is = socketduserveur.getInputStream(); 
-            ObjectInputStream ois = new ObjectInputStream(is);
-            // Flux de sortie
-            OutputStream os = socketduserveur.getOutputStream();
-            ObjectOutputStream oos = new ObjectOutputStream(os);
-            
-            // Boucle d'envoie et de reception de requetes
-            while(ois != null){
-                r = (Request) ois.readObject();
-                r.exec(datas);
-                oos.writeObject(r);
-                nb++;
-            }
-        } catch (IOException e) {
-            System.err.println("Connexion interrompue par le client. (Requetes executees : " + nb + ")");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } finally {
+        while(true){
             try {
-                socketduserveur.close();
-                socketServer.close();
-                System.out.println("Socket fermee.");
+                Socket socketClient = socketServer.accept();
+                System.out.println("Connexion etablie");
+                Thread process = new Thread(new RequestServeur(socketClient, datas));
+                process.start();
             } catch (IOException e) {
                 e.printStackTrace();
+                break;
             }
         }
+        
+        
+            // Fermeture de la socket
+       
+//        try {
+//            socketServer.close();
+//        } catch (IOException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
+//        System.out.println("Socket serveur fermee.");
+        
     }
 }

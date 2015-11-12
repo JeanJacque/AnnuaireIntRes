@@ -1,6 +1,6 @@
 package protocole;
 
-import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Vector;
 
 /**
@@ -19,7 +19,7 @@ public class AddName extends Request{
 	}
 	
 	@Override
-	public int exec(HashMap<String, String> datas) {
+	public int exec(Hashtable<String, String> datas) {
 		for (String nickname : nicknames) {
 			if (datas.containsKey(nickname))
 				status += "ERREUR : Le nom " + nickname + " existe deja \n";

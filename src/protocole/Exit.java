@@ -1,6 +1,6 @@
 package protocole;
 
-import java.util.HashMap;
+import java.util.Hashtable;
 
 /**
  * Requete de l'interruption de la connexion client-serveur
@@ -14,7 +14,7 @@ public class Exit extends Request {
 	 * Ferme la connexion avec le client du cote serveur
 	 */
 	@Override
-	public int exec(HashMap<String, String> datas) {
+	public int exec(Hashtable<String, String> datas) {
 		System.out.println("Demande d'interruption de la connexion avec le client");
 		return -1;
 	}
