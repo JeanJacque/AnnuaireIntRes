@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -13,6 +15,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import protocole.AddName;
 import protocole.Request;
 
 /**
@@ -54,33 +57,37 @@ public class Serveur {
      * traiter, tant que la connexion n'est pas fermée
      */
     public void run() {
+        int nb = 0;
         try {
         	socketduserveur = socketServer.accept();
             System.out.println("Connexion etablie");
             Request r;
-            int nb = 0;
-            while(true) {
-	            InputStream is = socketduserveur.getInputStream(); 
-	            ObjectInputStream ois = new ObjectInputStream(is);
-	            
-	            r = (Request) ois.readObject();
-	            if (r.exec(datas) < 0) break;
-	            for(Entry<String, String> entry : datas.entrySet()){
-	                System.out.println(entry.getKey()+ " -> " + entry.getValue());
-	            }
-//	            while(iterator.hasNext()) {
-//	               Map.Entry mentry = (Map.Entry)iterator.next();
-//	               System.out.println("nickname: "+ mentry.getKey() + "\t name:" + mentry.getValue());
-//	            }
+            // Flux d'entree
+            InputStream is = socketduserveur.getInputStream(); 
+            ObjectInputStream ois = new ObjectInputStream(is);
+            // Flux de sortie
+            OutputStream os = socketduserveur.getOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(os);
+            
+            // Boucle d'envoie et de reception de requetes
+            while(ois != null){
+                r = (Request) ois.readObject();
+                r.exec(datas);
+                oos.writeObject(r);
+                nb++;
             }
-            System.out.println("Connexion finie !! ("  + nb + " requetes)");
-            socketduserveur.close();
-            socketServer.close();
         } catch (IOException e) {
-            System.err.println(e);
+            System.err.println("Connexion interrompue par le client. (Requetes executees : " + nb + ")");
         } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
-        } 
+        } finally {
+            try {
+                socketduserveur.close();
+                socketServer.close();
+                System.out.println("Socket fermee.");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
