@@ -44,30 +44,27 @@ public class RequestServeur implements Runnable {
     public void run() {
 
         int nb = 0;
+
+        // Boucle d'envoie et de reception de requetes
         try {
             Request r;
-            
-            // Boucle d'envoie et de reception de requetes
-            while (ois != null) {
-                r = (Request) ois.readObject();
+            while ((r = (Request) ois.readObject()) != null) {
                 r.exec(datas);
                 oos.writeObject(r);
                 nb++;
             }
-        } catch (IOException e) {
-            System.err
-                    .println("Connexion interrompue par le client. (Requetes executees : "
-                            + nb + ")");
-        } catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException | IOException e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
-        } finally {
-            // Fermeture de la socket
-            try {
-                socket.close();
-                System.out.println("Socket fermee.");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
+
+        // Fermeture de la socket
+        try {
+            socket.close();
+            System.out.println("Socket fermee.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
