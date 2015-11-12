@@ -27,7 +27,7 @@ public class GetAll extends Request {
 		datas = result;
 	}
 
-	private HashMap<String, String> getDatas() {
+	public HashMap<String, String> getDatas() {
 		return datas;
 
 	}
