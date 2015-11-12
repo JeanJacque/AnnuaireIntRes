@@ -2,15 +2,17 @@ package client;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.util.Map.Entry;
 import java.util.Vector;
 
 import org.omg.CORBA.portable.UnknownException;
 
 import protocole.AddName;
-import protocole.Exit;
 import protocole.GetAll;
 
 /**
@@ -25,7 +27,6 @@ public class Client implements Runnable {
     private Socket clientSocket;
     private OutputStream os;
     private BufferedInputStream in;
-
     /**
      * .
      * 
@@ -46,6 +47,8 @@ public class Client implements Runnable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
+     
     }
 
     /**
@@ -53,22 +56,37 @@ public class Client implements Runnable {
      * les réponses, tant que la connexion n'est pas fermée
      */
     public void run() {
-        System.err.println("Lancement du traitement de connection cliente");
+        System.out.println("Lancement du traitement de connection cliente");
+        System.out.println("=============================================\n");
         while (!clientSocket.isClosed()) {
             try {
             	os = clientSocket.getOutputStream();
             	ObjectOutputStream oos = new ObjectOutputStream(os);
+            	InputStream is = clientSocket.getInputStream(); 
+	            ObjectInputStream ois = new ObjectInputStream(is);
+	            
             	Vector<String> ask = new Vector<String>();
             	ask.add("BunnyDunker");
             	ask.add("Trigunale");
             	oos.writeObject(new AddName("Alex", ask));
-//            	oos.writeObject(new GetAll());
-//            	oos.writeObject(new Exit());
-                System.out.println("Commande envoy�e au serveur");
+	            AddName a = (AddName) ois.readObject();
+            	oos.writeObject(new GetAll());
+            	
+	            GetAll g = (GetAll) ois.readObject();
+	            for(Entry<String, String> entry : g.getDatas().entrySet()) {
+	                String cle = entry.getKey();
+	                String valeur = entry.getValue();
+	                System.out.println("Surnom : " + cle + "\t nom : "+valeur);
+	            }
+	            //            	oos.writeObject(new Exit());
+                System.out.println("Commande envoyee au serveur");
                 clientSocket.close();
             } catch (IOException e1) {
                 e1.printStackTrace();
-            }
+            } catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         }
     }
 }
