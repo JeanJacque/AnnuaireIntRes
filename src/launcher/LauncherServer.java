@@ -1,5 +1,5 @@
 package launcher;
-import serveur.Serveur;
+import serveurUDP.Serveur;
 
 /**
  * @author Th�o Donzelle, Alexandre CAZALA
@@ -8,8 +8,7 @@ import serveur.Serveur;
  */
 public class LauncherServer {
 	public static void main(String[] args) {
-		int port = 4042;
-		Serveur serv = new Serveur(port);
+		Serveur serv = new Serveur();
 		serv.run();
 	}
 }

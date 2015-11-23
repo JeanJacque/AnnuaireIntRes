@@ -16,8 +16,6 @@ public class GetAll extends Request {
 
 	/**
 	 * Constructeur par defaut
-	 * 
-	 * @author Alexandre CAZALA, Theo Donzelle
 	 */
 	public GetAll() {
 
