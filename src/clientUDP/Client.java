@@ -1,19 +1,16 @@
-package client;
+package clientUDP;
 
-import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.net.Socket;
-import java.util.Map.Entry;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.util.Vector;
 
 import org.omg.CORBA.portable.UnknownException;
 
 import protocole.AddName;
-import protocole.GetAll;
 
 /**
  * 
@@ -24,9 +21,9 @@ import protocole.GetAll;
  *         proposÃ©s par le serveur.
  */
 public class Client implements Runnable {
-    private Socket clientSocket;
-    private OutputStream os;
-    private BufferedInputStream in;
+    private DatagramSocket clientSocket;
+    InetAddress IPAddress;
+    int port;
     /**
      * .
      * 
@@ -41,7 +38,9 @@ public class Client implements Runnable {
      */
     public Client(String host, int port) {
         try {
-            clientSocket = new Socket(host, port);
+            clientSocket = new DatagramSocket();
+            IPAddress = InetAddress.getByName(host);
+            this.port = port;
         } catch (UnknownException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -60,15 +59,24 @@ public class Client implements Runnable {
         System.out.println("=============================================\n");
         while (!clientSocket.isClosed()) {
             try {
-            	os = clientSocket.getOutputStream();
-            	ObjectOutputStream oos = new ObjectOutputStream(os);
-            	InputStream is = clientSocket.getInputStream(); 
-	            ObjectInputStream ois = new ObjectInputStream(is);
-	            
             	Vector<String> ask = new Vector<String>();
-            	ask.add("JeanJacques");
-            	
-            	oos.writeObject(new AddName("Théo", ask));
+            	byte[] sendData = new byte[1024];
+                byte[] incomingData = new byte[1024];
+                ask.addElement("JeansJacques");
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                ObjectOutputStream os = new ObjectOutputStream(outputStream);
+                os.writeObject(new AddName("Théo",ask));
+                byte[] data = outputStream.toByteArray();
+                DatagramPacket sendPacket = new DatagramPacket(data, data.length, IPAddress, port);
+                clientSocket.send(sendPacket);
+                System.out.println("Message sent from client");
+                
+                // CODE A RAJOUTER POUR LIRE
+                DatagramPacket incomingPacket = new DatagramPacket(incomingData, incomingData.length);
+                clientSocket.receive(incomingPacket);
+                System.out.println(new String(incomingPacket.getData()));
+                
+            	/*clientSocket.send(new AddName("Théo", ask));
 	            AddName a = (AddName) ois.readObject();
 	            Thread.sleep(2000);
             	oos.writeObject(new GetAll());
@@ -80,17 +88,11 @@ public class Client implements Runnable {
 	                System.out.println("Surnom : " + cle + "\t nom : "+valeur);
 	            }
 	            //            	oos.writeObject(new Exit());
-                System.out.println("Commande envoyee au serveur");
+                System.out.println("Commande envoyee au serveur");*/
                 clientSocket.close();
             } catch (IOException e1) {
                 e1.printStackTrace();
-            } catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+            }
         }
     }
 }

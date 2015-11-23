@@ -1,7 +1,5 @@
 package launcher;
-import client.Client;
-import serveur.Serveur;
-
+import clientUDP.Client;
 /**
  * @author Th�o Donzelle, Alexandre CAZALA
  * 
@@ -10,7 +8,7 @@ import serveur.Serveur;
 public class LauncherClient {
     public static void main(String[] args) {
         int port = 4042;
-        Client cli = new Client("localhost", port);
+        Client cli = new Client("10.212.100.252", port);
         cli.run();
     }
 }
