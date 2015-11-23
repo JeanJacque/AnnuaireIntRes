@@ -66,10 +66,11 @@ public class Client implements Runnable {
 	            ObjectInputStream ois = new ObjectInputStream(is);
 	            
             	Vector<String> ask = new Vector<String>();
-            	ask.add("BunnyDunker");
-            	ask.add("Trigunale");
-            	oos.writeObject(new AddName("Alex", ask));
+            	ask.add("JeanJacques");
+            	
+            	oos.writeObject(new AddName("Théo", ask));
 	            AddName a = (AddName) ois.readObject();
+	            Thread.sleep(2000);
             	oos.writeObject(new GetAll());
             	
 	            GetAll g = (GetAll) ois.readObject();
@@ -84,6 +85,9 @@ public class Client implements Runnable {
             } catch (IOException e1) {
                 e1.printStackTrace();
             } catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
